@@ -4,18 +4,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 public class HomePage {
-    private BaseFunc baseFunc;
+    private BaseFunc baseFunc; // 1. peremennaja dlja BaseFunc. Sozdatj!
 
     private final By TITLE = By.xpath(".//div[@class = 'toolbar']");
     private final By DIRECTION_A = By.id("afrom");
     private final By DIRECTION_B = By.id("bfrom");
     private final By GOGOGO = By.xpath(".//span[@class = 'gogogo']");
 
+    // 2. Create constructor (funkcionaljnostj, nabor locatorov, kotorie s nimi rabotajut konkretnogo page.
+    // Nuzhno predostavitj brauzernoe okno, v kotorom budem rabotatj)
 
+    public HomePage(BaseFunc baseFunc) {
 
-
-    //constructor
-    public HomePage (BaseFunc baseFunc) {
         this.baseFunc = baseFunc;
     }
 
@@ -30,19 +30,18 @@ public class HomePage {
 
     }
 
-    public void selectDirect(){
-        Select directionA = new Select(baseFunc.getElement(DIRECTION_A));
-        directionA.selectByValue("HAK");
-        dirAValue = baseFunc.getElement(DIRECTION_A).getText();
-
-        Select directionB = new Select(baseFunc.getElement(DIRECTION_B));
-        directionB.selectByValue("RIX");
-        dirBValue = baseFunc.getElement(DIRECTION_B).getText();
-
+    public void selectDeparture(String airport) {
+        //find dropdown
+        //choose value from dropdown
+        baseFunc.selectByText(DIRECTION_A, airport);
     }
 
-    public void pressGoGoGo(){
-        baseFunc.getElement(GOGOGO).click();
+    public void selectArrival(String airport) {
+        baseFunc.selectByText(DIRECTION_B, airport);
+    }
+
+    public void pressGoGoGo() {
+        baseFunc.clickElement(GOGOGO);
     }
 
 }
